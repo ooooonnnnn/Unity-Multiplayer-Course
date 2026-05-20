@@ -22,7 +22,6 @@ public class LobbyJoiner : PersistentSingleton<LobbyJoiner>
         
         if (result.Ok)
         {
-            print($"Joined {lobbyName}");
             LobbyName = lobbyName;
             OnJoinedLobby.Invoke();
         }
