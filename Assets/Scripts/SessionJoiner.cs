@@ -21,6 +21,8 @@ public class SessionJoiner : PersistentSingleton<SessionJoiner>
 
     public void JoinSessionFromSettings()
     {
+        print($"Joining session: {SessionName}");
+        
         JoinSession(networkRunner, new StartGameArgs
         {
             GameMode = GameMode.Shared,
