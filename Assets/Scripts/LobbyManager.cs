@@ -9,7 +9,6 @@ public class LobbyManager : MonoBehaviour
     public void JoinLobby(string lobbyName)
     {
         JoinLobbyAsync(lobbyName);
-        networkRunner
     }
     
     public async Task JoinLobbyAsync(string lobbyName)
