@@ -5,6 +5,8 @@ public class SessionJoiner : MonoBehaviour
 {
     [SerializeField] private NetworkRunner networkRunner;
     public string SessionName { get; set; }
+    [SerializeField] private int playerCapacity;
+    [SerializeField] private int maxCapacity;
     
     public void TestCreateSession()
     {
@@ -12,12 +14,18 @@ public class SessionJoiner : MonoBehaviour
         {
             GameMode = GameMode.Shared,
             SessionName = SessionName,
-            CustomLobbyName = LobbyJoiner.Instance.LobbyName
+            CustomLobbyName = LobbyJoiner.Instance.LobbyName,
+            PlayerCount = playerCapacity
         });
     }
 
-    public static string SessionNameCreator()
+    public void IncreasePlayerCapacity()
     {
-        return Random.Range(0, 1000000).ToString();
+        playerCapacity = Mathf.Clamp(playerCapacity + 1, 1, maxCapacity);
+    }
+    
+    public void DecreasePlayerCapacity()
+    {
+        playerCapacity = Mathf.Clamp(playerCapacity - 1, 1, maxCapacity);
     }
 }
