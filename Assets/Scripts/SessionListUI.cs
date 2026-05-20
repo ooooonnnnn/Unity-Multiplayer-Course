@@ -30,7 +30,7 @@ public class SessionListUI : MonoBehaviour
                            sessionInfo.IsOpen;
             newItem.SetCanJoin(canJoin);
             
-            newItem.SetCallback(() => TestJoinSession(runner, sessionInfo));
+            newItem.SetCallback(() => SessionJoiner.Instance.JoinSpecificSession(runner, sessionInfo));
         }
     }
 
@@ -42,21 +42,5 @@ public class SessionListUI : MonoBehaviour
             itemsToDelete.Add(child.gameObject);
         }
         itemsToDelete.ForEach(Destroy);
-    }
-
-    private async void TestJoinSession(NetworkRunner runner, SessionInfo sessionInfo)
-    {
-        print($"Joining session: {sessionInfo.Name}");
-                
-        var result = await runner.StartGame(new StartGameArgs
-        {
-            GameMode = GameMode.Shared,
-            SessionName = sessionInfo.Name,
-            IsVisible = sessionInfo.IsVisible,
-            IsOpen = sessionInfo.IsOpen,
-            
-        });
-        if (result.Ok) print("Joined session");
-        print(result.ErrorMessage);
     }
 }
