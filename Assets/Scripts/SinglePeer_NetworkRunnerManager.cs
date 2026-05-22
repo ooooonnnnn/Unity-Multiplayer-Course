@@ -17,6 +17,12 @@ public class SinglePeer_NetworkRunnerManager : PersistentSingleton<SinglePeer_Ne
         networkEvents = GetComponent<NetworkEvents>();
     }
 
+    protected override void Awake()
+    {
+        base.Awake();
+        NetworkRunner.AddCallbacks(networkEvents);
+    }
+
     public void ReinstantiateRunner()
     {
         if (NetworkRunner) Destroy(NetworkRunner.gameObject);

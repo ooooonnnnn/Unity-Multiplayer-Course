@@ -7,7 +7,7 @@ public class SessionListUI : MonoBehaviour
     [SerializeField] private SessionItemUI sessionItemPrefab;
     [SerializeField] private Transform listContainer;
     
-    public void ShowSessionList(NetworkRunner runner, List<SessionInfo> sessionList)
+    public void ShowSessionList(List<SessionInfo> sessionList)
     {
         print($"Updating session list");
         
@@ -30,7 +30,7 @@ public class SessionListUI : MonoBehaviour
                            sessionInfo.IsOpen;
             newItem.SetCanJoin(canJoin);
             
-            newItem.SetCallback(() => SessionJoiner.Instance.JoinSpecificSession(runner, sessionInfo));
+            newItem.SetCallback(() => SessionJoiner.Instance.JoinSpecificSession(sessionInfo));
         }
     }
 

@@ -1,24 +1,31 @@
 using System;
+using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class SessionJoiner : PersistentSingleton<SessionJoiner>
 {
+    [Header("Custom Session Settings")]
     public string SessionName { get; set; }
     [SerializeField] private int playerCapacity;
     [SerializeField] private int maxCapacity;
+    
+    [Header("Events")]
     public UnityEvent<int> OnCapacityChanged;
     public UnityEvent OnStartJoin;
     public UnityEvent<NetworkRunner> OnJoined;
     public UnityEvent OnCancelJoin;
+    public UnityEvent<List<SessionInfo>> OnAvaliableSessionsChanged;
+    
+    private List<SessionInfo> availableSessions;
 
     private void Start()
     {
         OnCapacityChanged.Invoke(playerCapacity);
     }
 
-    public void JoinSessionFromSettings()
+    public void JoinCustomSession()
     {
         print($"Joining session: {SessionName}");
         var networkRunner = SinglePeer_NetworkRunnerManager.Instance.NetworkRunner;
@@ -31,8 +38,9 @@ public class SessionJoiner : PersistentSingleton<SessionJoiner>
         });
     }
 
-    public void JoinSpecificSession(NetworkRunner runner, SessionInfo sessionInfo)
+    public void JoinSpecificSession(SessionInfo sessionInfo)
     {
+        var runner = SinglePeer_NetworkRunnerManager.Instance.NetworkRunner;
         JoinSession(runner, new StartGameArgs()
         {
             GameMode = GameMode.Shared,
@@ -68,5 +76,11 @@ public class SessionJoiner : PersistentSingleton<SessionJoiner>
     {
         playerCapacity = Mathf.Clamp(playerCapacity - 1, 1, maxCapacity);
         OnCapacityChanged.Invoke(playerCapacity);
+    }
+    
+    public void UpdateAvailableSessions(NetworkRunner runner, List<SessionInfo> sessionList)
+    {
+        availableSessions = new List<SessionInfo>(sessionList);
+        OnAvaliableSessionsChanged.Invoke(availableSessions);
     }
 }
