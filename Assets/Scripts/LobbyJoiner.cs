@@ -15,7 +15,14 @@ public class LobbyJoiner : PersistentSingleton<LobbyJoiner>
     public void JoinLobby(string lobbyName)
     {
         if (busy) return;
+        
         JoinLobbyAsync(lobbyName);
+    }
+
+    public void ExitToLobby()
+    {
+        SinglePeer_NetworkRunnerManager.Instance.ReinstantiateRunner();
+        JoinLobby(LobbyName);
     }
     
     private async Task JoinLobbyAsync(string lobbyName)

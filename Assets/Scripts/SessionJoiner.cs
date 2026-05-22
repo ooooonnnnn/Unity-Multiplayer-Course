@@ -61,7 +61,6 @@ public class SessionJoiner : PersistentSingleton<SessionJoiner>
         }
         else
         {
-            SinglePeer_NetworkRunnerManager.Instance.ReinstantiateRunner();
             OnCancelJoin.Invoke();
         }
     }

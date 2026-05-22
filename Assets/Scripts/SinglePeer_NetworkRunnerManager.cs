@@ -5,8 +5,18 @@ using UnityEngine;
 [RequireComponent(typeof(NetworkEvents))]
 public class SinglePeer_NetworkRunnerManager : PersistentSingleton<SinglePeer_NetworkRunnerManager>
 {
-    [field: SerializeField] 
-    public NetworkRunner NetworkRunner {get; private set;}
+    public NetworkRunner NetworkRunner
+    {
+        get
+        {
+            if (!networkRunner)
+                ReinstantiateRunner();
+            return networkRunner;
+        }
+        private set => networkRunner = value;
+    }
+    [SerializeField] private NetworkRunner networkRunner;
+
     [SerializeField] private NetworkRunner networkRunnerPrefab;
     [SerializeField] private NetworkEvents networkEvents;
     

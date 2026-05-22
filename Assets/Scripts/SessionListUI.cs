@@ -9,15 +9,12 @@ public class SessionListUI : MonoBehaviour
     
     public void ShowSessionList(List<SessionInfo> sessionList)
     {
-        print($"Updating session list");
-        
         ClearList();
 
         foreach (SessionInfo sessionInfo in sessionList)
         {
             if (!sessionInfo.IsVisible)
             {
-                print("Session invisible");
                 continue;
             }
             
