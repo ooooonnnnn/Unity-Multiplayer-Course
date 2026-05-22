@@ -7,6 +7,7 @@ public class UIManager : PersistentSingleton<UIManager>
     [SerializeField] private GameObject lobbyMenu;
     [SerializeField] private GameObject sessionsMenu;
     [SerializeField] private GameObject playersMenu;
+    [SerializeField] private GameObject waitingScreen;
     [SerializeField] private UIStates initialState;
     private Dictionary<UIStates, GameObject> menus = new Dictionary<UIStates, GameObject>();
 
@@ -16,6 +17,7 @@ public class UIManager : PersistentSingleton<UIManager>
         menus.Add(UIStates.lobbyMenu, lobbyMenu);
         menus.Add(UIStates.sessionsMenu, sessionsMenu);
         menus.Add(UIStates.playersMenu, playersMenu);
+        menus.Add(UIStates.waitingScreen, waitingScreen);
         
         UpdateVisibility(initialState);
     }
@@ -25,6 +27,10 @@ public class UIManager : PersistentSingleton<UIManager>
     public void ShowSessionsMenu() => UpdateVisibility(UIStates.sessionsMenu);
 
     public void ShowPlayersMenu() => UpdateVisibility(UIStates.playersMenu);
+    
+    public void ShowWaitingScreen() => UpdateVisibility(UIStates.waitingScreen);
+    
+    public void ChangeScreen(UIStates state) => UpdateVisibility(state);
     
     private void UpdateVisibility(UIStates state)
     {

@@ -4,5 +4,6 @@ public enum UIStates
 {
     lobbyMenu,
     sessionsMenu,
-    playersMenu
+    playersMenu,
+    waitingScreen
 }

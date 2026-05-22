@@ -25,7 +25,7 @@ public class LobbyJoiner : PersistentSingleton<LobbyJoiner>
         
         OnStartJoin.Invoke();
         
-        var result =  await networkRunner.JoinSessionLobby(SessionLobby.Custom, lobbyName);
+        var result = await networkRunner.JoinSessionLobby(SessionLobby.Custom, lobbyName);
         
         if (result.Ok)
         {
