@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class LobbyJoiner : PersistentSingleton<LobbyJoiner>
 {
-    [SerializeField] private NetworkRunner networkRunner;
     public UnityEvent OnJoinedLobby;
     public UnityEvent OnStartJoin;
     public UnityEvent OnCancelJoin;
@@ -24,7 +23,8 @@ public class LobbyJoiner : PersistentSingleton<LobbyJoiner>
         busy = true;
         
         OnStartJoin.Invoke();
-        
+
+        var networkRunner = SinglePeer_NetworkRunnerManager.Instance.NetworkRunner;
         var result = await networkRunner.JoinSessionLobby(SessionLobby.Custom, lobbyName);
         
         if (result.Ok)
@@ -35,6 +35,7 @@ public class LobbyJoiner : PersistentSingleton<LobbyJoiner>
         else
         {
             print(result.ShutdownReason);
+            SinglePeer_NetworkRunnerManager.Instance.ReinstantiateRunner();
             OnCancelJoin.Invoke();
         }
         

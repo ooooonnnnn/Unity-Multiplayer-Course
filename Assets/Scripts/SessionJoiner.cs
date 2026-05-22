@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class SessionJoiner : PersistentSingleton<SessionJoiner>
 {
-    [SerializeField] private NetworkRunner networkRunner;
     public string SessionName { get; set; }
     [SerializeField] private int playerCapacity;
     [SerializeField] private int maxCapacity;
@@ -22,7 +21,7 @@ public class SessionJoiner : PersistentSingleton<SessionJoiner>
     public void JoinSessionFromSettings()
     {
         print($"Joining session: {SessionName}");
-        
+        var networkRunner = SinglePeer_NetworkRunnerManager.Instance.NetworkRunner;
         JoinSession(networkRunner, new StartGameArgs
         {
             GameMode = GameMode.Shared,
@@ -44,17 +43,17 @@ public class SessionJoiner : PersistentSingleton<SessionJoiner>
 
     private async void JoinSession(NetworkRunner runner, StartGameArgs args)
     {
-        var result = runner.StartGame(args);
         OnStartJoin.Invoke();
         
-        await result;
+        var result = await runner.StartGame(args);
         
-        if (result.Result.Ok)
+        if (result.Ok)
         {
             OnJoined.Invoke(runner);
         }
         else
         {
+            SinglePeer_NetworkRunnerManager.Instance.ReinstantiateRunner();
             OnCancelJoin.Invoke();
         }
     }
