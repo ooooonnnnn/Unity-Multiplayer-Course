@@ -1,10 +1,14 @@
 using System;
 using Fusion;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(NetworkEvents))]
 public class SinglePeer_NetworkRunnerManager : PersistentSingleton<SinglePeer_NetworkRunnerManager>
 {
+    [SerializeField, Tooltip("Passed with the new runner")]
+    private UnityEvent<NetworkRunner> OnRunnerInstantiated;
+    
     public NetworkRunner NetworkRunner
     {
         get
@@ -31,6 +35,7 @@ public class SinglePeer_NetworkRunnerManager : PersistentSingleton<SinglePeer_Ne
     {
         base.Awake();
         NetworkRunner.AddCallbacks(networkEvents);
+        OnRunnerInstantiated.Invoke(NetworkRunner);
     }
 
     public void ReinstantiateRunner()
@@ -39,5 +44,7 @@ public class SinglePeer_NetworkRunnerManager : PersistentSingleton<SinglePeer_Ne
         
         NetworkRunner = Instantiate(networkRunnerPrefab, transform);
         NetworkRunner.AddCallbacks(networkEvents);
+        
+        OnRunnerInstantiated.Invoke(NetworkRunner);
     }
 }

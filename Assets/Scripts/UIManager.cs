@@ -30,8 +30,6 @@ public class UIManager : PersistentSingleton<UIManager>
     
     public void ShowWaitingScreen() => UpdateVisibility(UIStates.waitingScreen);
     
-    public void ChangeScreen(UIStates state) => UpdateVisibility(state);
-    
     private void UpdateVisibility(UIStates state)
     {
         foreach (var menu in menus)
