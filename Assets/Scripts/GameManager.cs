@@ -26,6 +26,8 @@ public class GameManager : PersistentSingleton<GameManager>
 
         var loadAsyncOp = runner.LoadScene(gameSceneAsset.name, LoadSceneMode.Single);
         
+        runner.SessionInfo.IsOpen = false;
+        
         UIManager.Instance.ShowWaitingScreen();
     }
 }
