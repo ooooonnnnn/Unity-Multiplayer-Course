@@ -12,6 +12,8 @@ public class ObjectActiveByRunner : MonoBehaviour
         foreach (var obj in sceneAuthExclusiveObjs)
             obj.SetActive(isSceneAuth);
     }
+    
+    public void HandlePlayerLeft(NetworkRunner runner, PlayerRef _) => HandleNewRunner(runner);
 
     private void OnEnable()
     {
