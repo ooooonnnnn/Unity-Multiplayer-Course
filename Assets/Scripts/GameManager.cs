@@ -15,7 +15,7 @@ public class GameManager : PersistentSingleton<GameManager>, IGameManager
         Application.Quit();
     }
 
-    public void StartGame()
+    public async void StartGame()
     {
         NetworkRunner runner = SinglePeer_NetworkRunnerManager.Instance.NetworkRunner;
         if (!runner.IsSceneAuthority)
@@ -25,6 +25,7 @@ public class GameManager : PersistentSingleton<GameManager>, IGameManager
         }
 
         var loadAsyncOp = runner.LoadScene(gameSceneAsset.name, LoadSceneMode.Single);
+        await loadAsyncOp;
         
         runner.SessionInfo.IsOpen = false;
         

@@ -13,7 +13,11 @@ public class ObjectActiveByRunner : MonoBehaviour
             obj.SetActive(isSceneAuth);
     }
     
-    public void HandlePlayerLeft(NetworkRunner runner, PlayerRef _) => HandleNewRunner(runner);
+    public void HandlePlayerLeft(NetworkRunner runner, PlayerRef _)
+    {
+        print("Player left");
+        HandleNewRunner(runner);
+    }
 
     private void OnEnable()
     {

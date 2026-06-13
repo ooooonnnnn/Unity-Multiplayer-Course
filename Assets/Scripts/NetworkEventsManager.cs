@@ -16,6 +16,6 @@ public class NetworkEventsManager : Singleton<NetworkEventsManager>
     protected void Start()
     {
         SinglePeer_NetworkRunnerManager.Instance.networkEvents = networkEvents;
-        SinglePeer_NetworkRunnerManager.Instance.ReinstantiateRunner();
+        SinglePeer_NetworkRunnerManager.Instance.SubscribeRunnerToEvents();
     }
 }

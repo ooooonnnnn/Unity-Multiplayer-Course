@@ -30,17 +30,6 @@ public class SinglePeer_NetworkRunnerManager : PersistentSingleton<SinglePeer_Ne
         NetworkRunner = GetComponentInChildren<NetworkRunner>();
     }
 
-    // protected override void Awake()
-    // {
-    //     base.Awake();
-    //     if (networkEvents)
-    //         NetworkRunner.AddCallbacks(networkEvents);
-    //     else
-    //         Debug.LogError("No network events to subscribe to");
-    //
-    //     OnRunnerInstantiated.Invoke(NetworkRunner);
-    // }
-
     private void Start()
     {
         ReinstantiateRunner();
@@ -55,4 +44,6 @@ public class SinglePeer_NetworkRunnerManager : PersistentSingleton<SinglePeer_Ne
         
         OnRunnerInstantiated.Invoke(NetworkRunner);
     }
+    
+    public void SubscribeRunnerToEvents() => NetworkRunner.AddCallbacks(networkEvents);
 }
