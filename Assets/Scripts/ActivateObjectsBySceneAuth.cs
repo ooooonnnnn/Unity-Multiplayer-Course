@@ -2,7 +2,7 @@ using System;
 using Fusion;
 using UnityEngine;
 
-public class ObjectActiveByRunner : MonoBehaviour
+public class ActivateObjectsBySceneAuth : MonoBehaviour
 {
     [SerializeField] private GameObject[] sceneAuthExclusiveObjs;
 
