@@ -1,9 +1,9 @@
 using System;
+using System.Linq;
 using Fusion;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(NetworkEvents))]
 public class SinglePeer_NetworkRunnerManager : PersistentSingleton<SinglePeer_NetworkRunnerManager>
 {
     [SerializeField, Tooltip("Passed with the new runner")]
@@ -22,20 +22,28 @@ public class SinglePeer_NetworkRunnerManager : PersistentSingleton<SinglePeer_Ne
     [SerializeField] private NetworkRunner networkRunner;
 
     [SerializeField] private NetworkRunner networkRunnerPrefab;
-    [SerializeField] private NetworkEvents networkEvents;
+    public NetworkEvents networkEvents;
     
 
     private void OnValidate()
     {
         NetworkRunner = GetComponentInChildren<NetworkRunner>();
-        networkEvents = GetComponent<NetworkEvents>();
     }
 
-    protected override void Awake()
+    // protected override void Awake()
+    // {
+    //     base.Awake();
+    //     if (networkEvents)
+    //         NetworkRunner.AddCallbacks(networkEvents);
+    //     else
+    //         Debug.LogError("No network events to subscribe to");
+    //
+    //     OnRunnerInstantiated.Invoke(NetworkRunner);
+    // }
+
+    private void Start()
     {
-        base.Awake();
-        NetworkRunner.AddCallbacks(networkEvents);
-        OnRunnerInstantiated.Invoke(NetworkRunner);
+        ReinstantiateRunner();
     }
 
     public void ReinstantiateRunner()

@@ -2,8 +2,9 @@ using System.Threading.Tasks;
 using Fusion;
 using UnityEngine;
 using UnityEngine.Events;
+using Singleton;
 
-public class LobbyJoiner : PersistentSingleton<LobbyJoiner>
+public class LobbyJoiner : Singleton<LobbyJoiner>
 {
     public UnityEvent OnJoinedLobby;
     public UnityEvent OnStartJoin;

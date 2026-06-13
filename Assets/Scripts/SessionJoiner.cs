@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
 using UnityEngine.Events;
+using Singleton;
 
-public class SessionJoiner : PersistentSingleton<SessionJoiner>
+public class SessionJoiner : Singleton<SessionJoiner>
 {
     [Header("Custom Session Settings")]
     public string SessionName { get; set; }

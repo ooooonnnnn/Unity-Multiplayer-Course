@@ -1,13 +1,13 @@
 using System;
 using Fusion;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : PersistentSingleton<GameManager>
+public class GameManager : PersistentSingleton<GameManager>, IGameManager
 {
     [SerializeField] private SceneAsset gameSceneAsset;
+    [SerializeField] private SceneAsset connectionSceneAsset;
 
     public void QuitGame()
     {
@@ -29,5 +29,11 @@ public class GameManager : PersistentSingleton<GameManager>
         runner.SessionInfo.IsOpen = false;
         
         UIManager.Instance.ShowWaitingScreen();
+    }
+
+    public void ReturnToMenu()
+    {
+        SceneManager.LoadScene(connectionSceneAsset.name);
+        SinglePeer_NetworkRunnerManager.Instance.ReinstantiateRunner();
     }
 }

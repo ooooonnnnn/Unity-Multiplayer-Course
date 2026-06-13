@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
+using Singleton;
 
-public class UIManager : PersistentSingleton<UIManager>
+public class UIManager : Singleton<UIManager>
 {
     [SerializeField] private GameObject lobbyMenu;
     [SerializeField] private GameObject sessionsMenu;
