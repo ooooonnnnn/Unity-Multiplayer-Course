@@ -34,12 +34,12 @@ public class Chat : NetworkBehaviour
     private void AddMessage(string username, string message)
     {
         GameObject instantiate = Instantiate(messagePrefab, Vector3.zero, Quaternion.identity, Content.transform);
-        var msg = instantiate.GetComponent<Message>();
-        if (msg == null)
+        Message messageComponent = instantiate.GetComponent<Message>();
+        if (!messageComponent)
         {
             Debug.LogError("Message component missing on messagePrefab!");
             return;
         }
-        msg.SetText($"{username}: {message}");
+        messageComponent.SetText($"{username}: {messageComponent}");
     }
 }
