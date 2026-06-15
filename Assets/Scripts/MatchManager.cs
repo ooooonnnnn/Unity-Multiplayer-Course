@@ -1,11 +1,25 @@
-using System;
-using Fusion;
+
 using Singleton;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class MatchManager : Singleton<MatchManager>
 {
+    [SerializeField]
+    private SpawnPoint[] spawnPoints;
+
+    async void Start()
+    {
+        if (spawnPoints.Length == 0) return;
+
+        foreach (var player in SinglePeer_NetworkRunnerManager.Instance.NetworkRunner.ActivePlayers)
+        {
+            var selectedSpawn = spawnPoints[Random.Range(0, spawnPoints.Length)];
+
+            await selectedSpawn.SpawnGivenPlayer(player);
+        }
+    }
+
     [SerializeField] private UnityEvent OnMatchEnded;
 
     public void EndMatch()
