@@ -1642,25 +1642,73 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0.06666667
       objectReference: {fileID: 0}
+    - target: {fileID: 2550206891358774055, guid: 786ef7d7cd1f6ed48a54d63b332e6d5b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -18.220093
+      objectReference: {fileID: 0}
     - target: {fileID: 3949660226542435022, guid: 786ef7d7cd1f6ed48a54d63b332e6d5b, type: 3}
       propertyPath: m_Name
       value: CanvasChat
+      objectReference: {fileID: 0}
+    - target: {fileID: 4286083617122129597, guid: 786ef7d7cd1f6ed48a54d63b332e6d5b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1370.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4286083617122129597, guid: 786ef7d7cd1f6ed48a54d63b332e6d5b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 2155.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 4286083617122129597, guid: 786ef7d7cd1f6ed48a54d63b332e6d5b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -773.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 4286083617122129597, guid: 786ef7d7cd1f6ed48a54d63b332e6d5b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1277.83
       objectReference: {fileID: 0}
     - target: {fileID: 5324708668845409549, guid: 786ef7d7cd1f6ed48a54d63b332e6d5b, type: 3}
       propertyPath: SortKey
       value: 3038880113
       objectReference: {fileID: 0}
+    - target: {fileID: 5885293135004383253, guid: 786ef7d7cd1f6ed48a54d63b332e6d5b, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 6614542148852533300, guid: 786ef7d7cd1f6ed48a54d63b332e6d5b, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1728765730}
+    - target: {fileID: 7346951681222036435, guid: 786ef7d7cd1f6ed48a54d63b332e6d5b, type: 3}
+      propertyPath: m_ChildAlignment
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7675384037316881919, guid: 786ef7d7cd1f6ed48a54d63b332e6d5b, type: 3}
       propertyPath: chatNetwork
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8502052505606769234, guid: 786ef7d7cd1f6ed48a54d63b332e6d5b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 341.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502052505606769234, guid: 786ef7d7cd1f6ed48a54d63b332e6d5b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1289
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502872414264866697, guid: 786ef7d7cd1f6ed48a54d63b332e6d5b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 999.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502872414264866697, guid: 786ef7d7cd1f6ed48a54d63b332e6d5b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -588
+      objectReference: {fileID: 0}
+    - target: {fileID: 9181352885791803371, guid: 786ef7d7cd1f6ed48a54d63b332e6d5b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -450
+      objectReference: {fileID: 0}
     - target: {fileID: 9181352885791803371, guid: 786ef7d7cd1f6ed48a54d63b332e6d5b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00006576565
+      value: -0.00044193317
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
