@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f189a1a0af0a6f46894c8e283f84bf3, type: 3}
+  m_Name: character6
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterProperties
+  _id: -608464494
+  characterName: P
+  characterColor: {r: 0.043396115, g: 0.93641335, b: 1, a: 1}
+  spawnObject: {fileID: 1126937442830666779, guid: 8cfc4d375e4c4d044b3c1b56bbcbe466, type: 3}
