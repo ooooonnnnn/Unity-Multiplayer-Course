@@ -44,6 +44,7 @@ public class Player : NetworkBehaviour
     void Update()
     {
         if (!Object.HasInputAuthority) return;
+        
         if (Mouse.current.leftButton.wasPressedThisFrame && MatchManager.Instance != null)
         {            
             var screenPos = Mouse.current.position.ReadValue();
@@ -60,7 +61,11 @@ public class Player : NetworkBehaviour
                     // ik this is not optimal but it might just be 3am
                     var placeable = hit.transform.GetComponentInParent<PlaceableObject>();
                     if (placeable != null)
-                        MatchManager.Instance.RequestDeletePlaceable(placeable.Object.Id);
+                    {
+                        var netObj = placeable.GetComponent<NetworkObject>();
+                        if (netObj != null)
+                            MatchManager.Instance.RequestDeletePlaceable(netObj.Id);
+                    }
                 }
             }
         }

@@ -1,33 +1,26 @@
 using Fusion;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlacementManager : NetworkBehaviour
 {
-    public override void Spawned()
-    {
-        base.Spawned();
-        Debug.Log($"PlacementManager Spawned. HasStateAuthority: {Object.HasStateAuthority}. IsNetworkObjectValid: {Object != null}");
-    }
-
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
     public void PlacePlaceableRPC(int characterID, Vector3 position, RpcInfo info = default)
     {
-        if (!Object.HasStateAuthority) return;
-
         var props = CharacterProperties.GetByID(characterID);
-
         if (props == null) return;
 
         if (!props.spawnObject.TryGetComponent(out PlaceableObject placeable)) return;
-        
-        Runner.Spawn(props.spawnObject, position + placeable.GetGPOffset(), null);
+
+        Runner.Spawn(props.spawnObject, position + placeable.GetGPOffset(), null, info.Source);
     }
 
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
-    public void DeletePlaceableRPC(NetworkId targetId)
+    public void DeletePlaceableRPC(NetworkId targetId, RpcInfo info = default)
     {
-        if (Runner.TryFindObject(targetId, out NetworkObject networkObject) && networkObject.GetComponentInParent<PlaceableObject>())
+        if (!Runner.TryFindObject(targetId, out NetworkObject networkObject)) return;
+        if (networkObject.GetComponentInChildren<PlaceableObject>() == null) return;
+
+        if (networkObject.StateAuthority == info.Source || Object.HasStateAuthority)
         {
             Runner.Despawn(networkObject);
         }

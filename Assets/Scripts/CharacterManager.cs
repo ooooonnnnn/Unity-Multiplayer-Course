@@ -16,7 +16,7 @@ public class CharacterManager : NetworkBehaviour
     private void Awake()
     {
         if (characters == null) return;
-        
+
         foreach (var character in characters)
             CharacterProperties.Register(character);
     }
@@ -47,7 +47,6 @@ public class CharacterManager : NetworkBehaviour
     public async void RequestCharacterRPC(int characterID, RpcInfo info = default)
     {
         if (_playersInSelection.Contains(info.Source.PlayerId)) return;
-
         _playersInSelection.Add(info.Source.PlayerId);
 
         var characterProps = characters.First(x => x.CharacterID == characterID);
@@ -67,7 +66,6 @@ public class CharacterManager : NetworkBehaviour
         }
 
         _selectedCharacterIDs.Add(characterID);
-
         CharacterChosensuccessfullyRPC(info.Source, characterID);
         UpdateSelectedCharactersRPC(_selectedCharacterIDs.ToArray());
 
@@ -75,9 +73,16 @@ public class CharacterManager : NetworkBehaviour
 
         var sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
-        await sp.SpawnGivenPlayer(info.Source, characterProps);
+        TriggerSpawnRPC(info.Source, characterID, System.Array.IndexOf(spawnPoints, sp));
 
         _playersInSelection.Remove(info.Source.PlayerId);
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    public async void TriggerSpawnRPC(PlayerRef player, int characterID, int spawnPointIndex)
+    {
+        var character = characters.First(x => x.CharacterID == characterID);
+        await spawnPoints[spawnPointIndex].SpawnGivenPlayer(player, character);
     }
 
     // when someone wants a character but its not available

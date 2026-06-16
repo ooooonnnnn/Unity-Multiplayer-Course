@@ -15,10 +15,11 @@ public class SpawnPoint : MonoBehaviour
 
     public async Task SpawnGivenPlayer(PlayerRef player, CharacterProperties character, bool useRandomOffset = true)
     {
-        if (!SinglePeer_NetworkRunnerManager.Instance.NetworkRunner.IsSharedModeMasterClient) return;
+        var runner = SinglePeer_NetworkRunnerManager.Instance.NetworkRunner;
+        
+        if (runner.LocalPlayer != player) return;
 
         var offset = Vector3.up;
-
         if (useRandomOffset)
         {
             offset += new Vector3(
@@ -27,8 +28,8 @@ public class SpawnPoint : MonoBehaviour
                 Random.Range(minRandomOffset.y, maxRandomOffset.y)
             );
         }
-        
-        var spawned = await SinglePeer_NetworkRunnerManager.Instance.NetworkRunner.SpawnAsync(_playerPrefab, transform.position + offset, null, player);
+
+        var spawned = await runner.SpawnAsync(_playerPrefab, transform.position + offset, null, player);
         spawned.GetComponent<Player>().SetCharacter(character);
     }
 }
