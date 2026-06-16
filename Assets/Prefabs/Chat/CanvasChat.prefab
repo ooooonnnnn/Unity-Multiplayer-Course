@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -300, y: 0}
+  m_AnchoredPosition: {x: -450, y: -0.00044193317}
   m_SizeDelta: {x: 600, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &7346951681222036435
@@ -54,10 +54,10 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 1
-  m_Spacing: 20
+  m_ChildAlignment: 0
+  m_Spacing: 40
   m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -327,7 +327,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 68.45
+  m_fontSize: 72
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -408,8 +408,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -500, y: 500}
-  m_SizeDelta: {x: 600, y: 600}
+  m_AnchoredPosition: {x: -773.64, y: 1277.83}
+  m_SizeDelta: {x: 1370.9, y: 2155.67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5238810241417977379
 CanvasRenderer:
@@ -432,7 +432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.06666667}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -491,8 +491,6 @@ GameObject:
   - component: {fileID: 6614542148852533300}
   - component: {fileID: 1503825043472319622}
   - component: {fileID: 6329130072489595234}
-  - component: {fileID: 7675384037316881919}
-  - component: {fileID: 5324708668845409549}
   m_Layer: 5
   m_Name: CanvasChat
   m_TagString: Untagged
@@ -586,41 +584,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &7675384037316881919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3949660226542435022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4281a848d5530404f8b3b99c74c9c942, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Chat
-  messagePrefab: {fileID: 4648891711399231610, guid: 9b5287430a1e023419a447bbab0cd356, type: 3}
-  Content: {fileID: 611884570716417504}
-  inputField: {fileID: 8761292443983176883}
-  username: Player
---- !u!114 &5324708668845409549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3949660226542435022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkObject
-  SortKey: 3712558597
-  ObjectInterest: 1
-  Flags: 262145
-  NestedObjects: []
-  NetworkedBehaviours:
-  - {fileID: 7675384037316881919}
-  ForceRemoteRenderTimeframe: 0
 --- !u!1 &3993726049638416540
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,8 +757,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -940, y: 100}
-  m_SizeDelta: {x: 160, y: 120}
+  m_AnchoredPosition: {x: -1289, y: 100}
+  m_SizeDelta: {x: 341.71, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6541790154923564912
 CanvasRenderer:
@@ -879,7 +842,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7675384037316881919}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Chat, Assembly-CSharp
         m_MethodName: CallMessageRPC
         m_Mode: 1
@@ -927,7 +890,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -18.220001}
+  m_AnchoredPosition: {x: 0, y: -18.220093}
   m_SizeDelta: {x: 0, y: -36.44}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &9055722887685201103
@@ -1017,8 +980,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -500, y: 100}
-  m_SizeDelta: {x: 640, y: 120}
+  m_AnchoredPosition: {x: -588, y: 100}
+  m_SizeDelta: {x: 999.63, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1382142175093448656
 CanvasRenderer:
