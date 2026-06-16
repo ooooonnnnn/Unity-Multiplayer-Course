@@ -1,4 +1,5 @@
 
+using Fusion;
 using Singleton;
 using UnityEngine;
 using UnityEngine.Events;
@@ -6,17 +7,17 @@ using UnityEngine.Events;
 public class MatchManager : Singleton<MatchManager>
 {
     [SerializeField]
-    private SpawnPoint[] spawnPoints;
+    private CharacterManager cm;
+    [SerializeField]
+    private PlacementManager pm;
 
-    async void Start()
+    public void OnSceneLoaded(NetworkRunner runner)
     {
-        if (spawnPoints.Length == 0) return;
+        if (!SinglePeer_NetworkRunnerManager.Instance.NetworkRunner.IsSceneAuthority) return;
 
         foreach (var player in SinglePeer_NetworkRunnerManager.Instance.NetworkRunner.ActivePlayers)
         {
-            var selectedSpawn = spawnPoints[Random.Range(0, spawnPoints.Length)];
-
-            await selectedSpawn.SpawnGivenPlayer(player);
+            cm.MakeSelectCharacterRPC(player);
         }
     }
 
@@ -31,5 +32,15 @@ public class MatchManager : Singleton<MatchManager>
         }
         
         OnMatchEnded.Invoke();
+    }
+
+    public void RequestPlacePlaceable(int characterID, Vector3 position)
+    {
+        pm.PlacePlaceableRPC(characterID, position);
+    }
+
+    public void RequestDeletePlaceable(NetworkId id)
+    {
+        pm.DeletePlaceableRPC(id);
     }
 }

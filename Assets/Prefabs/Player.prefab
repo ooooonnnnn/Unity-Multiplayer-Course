@@ -162,9 +162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24848061a6bb406419ad7da6c2cf3607, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _moveDir: {x: 0, y: 0, z: 0}
-  _moveSpeed: 10
-  _input: {fileID: 6195028663579497685}
+  modelRenderer: {fileID: 6373446527506911363}
+  _CharacterID: 0
 --- !u!114 &6874228769804373575
 MonoBehaviour:
   m_ObjectHideFlags: 0

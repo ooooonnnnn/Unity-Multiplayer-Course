@@ -13,7 +13,7 @@ public class SpawnPoint : MonoBehaviour
     [SerializeField]
     private GameObject _playerPrefab;
 
-    public async Task SpawnGivenPlayer(PlayerRef player, bool useRandomOffset = true)
+    public async Task SpawnGivenPlayer(PlayerRef player, CharacterProperties character, bool useRandomOffset = true)
     {
         if (!SinglePeer_NetworkRunnerManager.Instance.NetworkRunner.IsSharedModeMasterClient) return;
 
@@ -28,6 +28,7 @@ public class SpawnPoint : MonoBehaviour
             );
         }
         
-        await SinglePeer_NetworkRunnerManager.Instance.NetworkRunner.SpawnAsync(_playerPrefab, transform.position + offset, null, player);
+        var spawned = await SinglePeer_NetworkRunnerManager.Instance.NetworkRunner.SpawnAsync(_playerPrefab, transform.position + offset, null, player);
+        spawned.GetComponent<Player>().SetCharacter(character);
     }
 }
