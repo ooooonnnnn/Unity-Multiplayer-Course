@@ -45,7 +45,7 @@ public class Player : NetworkBehaviour
     {
         if (!Object.HasInputAuthority) return;
         
-        if (Mouse.current.leftButton.wasPressedThisFrame && MatchManager.Instance != null)
+        if (Mouse.current.leftButton.wasPressedThisFrame && MatchManager.Instance)
         {            
             var screenPos = Mouse.current.position.ReadValue();
             Ray ray = Camera.main.ScreenPointToRay(screenPos);
@@ -66,6 +66,23 @@ public class Player : NetworkBehaviour
                         if (netObj != null)
                             MatchManager.Instance.RequestDeletePlaceable(netObj.Id);
                     }
+                }
+            }
+        }
+        if (Mouse.current.rightButton.wasPressedThisFrame && MatchManager.Instance)
+        {
+            var screenPos = Mouse.current.position.ReadValue();
+            Ray ray = Camera.main.ScreenPointToRay(screenPos);
+
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                Vector3 origin = transform.position;
+                Vector3 direction = hit.point - origin;
+                direction.y = 0f;
+
+                if (direction.sqrMagnitude > 0.0001f)
+                {
+                    MatchManager.Instance.RequestSpawnProjectile(CharacterID, origin, direction.normalized);
                 }
             }
         }

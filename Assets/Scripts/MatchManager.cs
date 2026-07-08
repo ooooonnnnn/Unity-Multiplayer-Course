@@ -43,4 +43,9 @@ public class MatchManager : Singleton<MatchManager>
     {
         pm.DeletePlaceableRPC(id);
     }
+    
+    public void RequestSpawnProjectile(int characterID, Vector3 origin, Vector3 direction)
+    {
+        pm.SpawnProjectileRPC(characterID, origin, direction);
+    }
 }

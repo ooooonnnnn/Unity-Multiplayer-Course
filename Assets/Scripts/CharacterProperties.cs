@@ -14,6 +14,7 @@ public class CharacterProperties : ScriptableObject
     public string characterName;
     public Color characterColor = Color.white;
     public GameObject spawnObject;
+    public GameObject projectile;
 
     private static Dictionary<int, CharacterProperties> _characterRegistry;
 
