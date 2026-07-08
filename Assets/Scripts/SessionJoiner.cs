@@ -11,6 +11,7 @@ public class SessionJoiner : Singleton<SessionJoiner>
     public string SessionName { get; set; }
     [SerializeField] private int playerCapacity;
     [SerializeField] private int maxCapacity;
+    [SerializeField] private bool isVisible;
     
     [Header("Events")]
     public UnityEvent<int> OnCapacityChanged;
@@ -35,7 +36,8 @@ public class SessionJoiner : Singleton<SessionJoiner>
             GameMode = GameMode.Shared,
             SessionName = SessionName,
             CustomLobbyName = LobbyJoiner.Instance.LobbyName,
-            PlayerCount = playerCapacity
+            PlayerCount = playerCapacity,
+            IsVisible = isVisible
         });
     }
 

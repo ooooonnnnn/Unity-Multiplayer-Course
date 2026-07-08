@@ -4998,6 +4998,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   playerCapacity: 5
   maxCapacity: 20
+  isVisible: 1
   OnCapacityChanged:
     m_PersistentCalls:
       m_Calls:
