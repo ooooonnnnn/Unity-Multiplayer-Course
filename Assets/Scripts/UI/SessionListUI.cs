@@ -45,12 +45,7 @@ public class SessionListUI : MonoBehaviour
             
             var newItem = Instantiate(sessionItemPrefab, listContainer);
             
-            newItem.SetSessionName(sessionInfo.Name);
-            newItem.SetPlayerCount(sessionInfo.PlayerCount, sessionInfo.MaxPlayers);
-            
-            bool canJoin = sessionInfo.MaxPlayers > sessionInfo.PlayerCount &&
-                           sessionInfo.IsOpen;
-            newItem.SetCanJoin(canJoin);
+            newItem.SetSessionInfo(sessionInfo);
             
             newItem.SetCallback(() => SessionJoiner.Instance.JoinSpecificSession(sessionInfo));
         }
