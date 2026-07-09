@@ -174,3 +174,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HittableTarget
   modelRenderer: {fileID: 757437086094561534}
+  hitEffectPrefab: {fileID: 4966572493481285008, guid: f0d7d3afef31710479bbd26a928f1a65, type: 3}

@@ -5,12 +5,19 @@ using UnityEngine;
 public class HittableTarget : NetworkBehaviour
 {
     [SerializeField] private Renderer modelRenderer;
+    [SerializeField] private ParticleSystem hitEffectPrefab;
+    [SerializeField] private float flashDuration = 1f;
 
     [Networked, OnChangedRender(nameof(OnHitStateChanged))]
     private bool isHit {get; set;}
+    
+    private Color _originalColor;
+    private readonly Color _hitColor = Color.red;
+    
 
     public override void Spawned()
     {
+        _originalColor = modelRenderer.material.color;
         OnHitStateChanged();
     }
 
@@ -25,10 +32,20 @@ public class HittableTarget : NetworkBehaviour
 
         Debug.Log(gameObject.name + " was hit by " + hitObject.name);
         isHit = true;
+
+        RpcPlayHitEffect();
+    }
+    
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void RpcPlayHitEffect()
+    {
+        ParticleSystem effect = Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
+        effect.Play();
+        Destroy(effect.gameObject, effect.main.duration);
     }
 
     private void OnHitStateChanged()
     {
-        modelRenderer.material.color = isHit ? Color.red : Color.blue;
+        modelRenderer.material.color = isHit ? _hitColor : _originalColor;
     }
 }
