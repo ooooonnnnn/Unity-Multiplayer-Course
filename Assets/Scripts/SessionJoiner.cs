@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Enums;
 using Fusion;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,11 +8,14 @@ using Singleton;
 
 public class SessionJoiner : Singleton<SessionJoiner>
 {
+    public const string GAMEMODE_PROPERTY_NAME = "GameMode";
+
     [Header("Custom Session Settings")]
     public string SessionName { get; set; }
     [SerializeField] private int playerCapacity;
     [SerializeField] private int maxCapacity;
     [SerializeField] private bool isVisible;
+    [SerializeField] private GameModes gameMode = GameModes.Fun;
     
     [Header("Events")]
     public UnityEvent<int> OnCapacityChanged;
@@ -37,7 +41,11 @@ public class SessionJoiner : Singleton<SessionJoiner>
             SessionName = SessionName,
             CustomLobbyName = LobbyJoiner.Instance.LobbyName,
             PlayerCount = playerCapacity,
-            IsVisible = isVisible
+            IsVisible = isVisible,
+            SessionProperties = new Dictionary<string, SessionProperty>
+            {
+                {GAMEMODE_PROPERTY_NAME, (int)gameMode}
+            }
         });
     }
 
@@ -81,6 +89,14 @@ public class SessionJoiner : Singleton<SessionJoiner>
     }
     
     public void SetVisibleFromPrivate(bool isPrivate) => isVisible = !isPrivate;
+
+    public void SetGameMode(GameModes gameMode)
+    {
+        if (gameMode == GameModes.Any)
+            throw new ArgumentOutOfRangeException(nameof(gameMode), "Cannot set game mode to Any");
+        
+        this.gameMode = gameMode;
+    }
     
     public void UpdateAvailableSessions(NetworkRunner runner, List<SessionInfo> sessionList)
     {

@@ -7,6 +7,7 @@ public class SessionItemUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text sessionName;
     [SerializeField] private TMP_Text playerCount;
+    [SerializeField] private TMP_Text gameMode;
     [SerializeField] private Button joinButton;
     
     public void SetSessionName(string name)
