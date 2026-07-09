@@ -80,6 +80,8 @@ public class SessionJoiner : Singleton<SessionJoiner>
         OnCapacityChanged.Invoke(playerCapacity);
     }
     
+    public void SetVisibleFromPrivate(bool isPrivate) => isVisible = !isPrivate;
+    
     public void UpdateAvailableSessions(NetworkRunner runner, List<SessionInfo> sessionList)
     {
         availableSessions = new List<SessionInfo>(sessionList);
