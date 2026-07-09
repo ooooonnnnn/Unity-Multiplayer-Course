@@ -90,12 +90,14 @@ public class SessionJoiner : Singleton<SessionJoiner>
     
     public void SetVisibleFromPrivate(bool isPrivate) => isVisible = !isPrivate;
 
-    public void SetGameMode(GameModes gameMode)
+    public void SetGameMode(int gameModeInt)
     {
-        if (gameMode == GameModes.Any)
-            throw new ArgumentOutOfRangeException(nameof(gameMode), "Cannot set game mode to Any");
+        GameModes chosenGameMode = (GameModes)(gameModeInt + 1);
         
-        this.gameMode = gameMode;
+        if (chosenGameMode == GameModes.Any)
+            throw new ArgumentOutOfRangeException(nameof(gameModeInt), "Cannot set game mode to Any");
+        
+        this.gameMode = chosenGameMode;
     }
     
     public void UpdateAvailableSessions(NetworkRunner runner, List<SessionInfo> sessionList)
