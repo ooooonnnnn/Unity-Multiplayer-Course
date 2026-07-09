@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Enums;
 using Fusion;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,10 +8,14 @@ using Singleton;
 
 public class SessionJoiner : Singleton<SessionJoiner>
 {
+    public const string GAMEMODE_PROPERTY_NAME = "GameMode";
+
     [Header("Custom Session Settings")]
     public string SessionName { get; set; }
     [SerializeField] private int playerCapacity;
     [SerializeField] private int maxCapacity;
+    [SerializeField] private bool isVisible;
+    [SerializeField] private GameModes gameMode = GameModes.Fun;
     
     [Header("Events")]
     public UnityEvent<int> OnCapacityChanged;
@@ -35,7 +40,12 @@ public class SessionJoiner : Singleton<SessionJoiner>
             GameMode = GameMode.Shared,
             SessionName = SessionName,
             CustomLobbyName = LobbyJoiner.Instance.LobbyName,
-            PlayerCount = playerCapacity
+            PlayerCount = playerCapacity,
+            IsVisible = isVisible,
+            SessionProperties = new Dictionary<string, SessionProperty>
+            {
+                {GAMEMODE_PROPERTY_NAME, (int)gameMode}
+            }
         });
     }
 
@@ -76,6 +86,18 @@ public class SessionJoiner : Singleton<SessionJoiner>
     {
         playerCapacity = Mathf.Clamp(playerCapacity - 1, 1, maxCapacity);
         OnCapacityChanged.Invoke(playerCapacity);
+    }
+    
+    public void SetVisibleFromPrivate(bool isPrivate) => isVisible = !isPrivate;
+
+    public void SetGameMode(int gameModeInt)
+    {
+        GameModes chosenGameMode = (GameModes)(gameModeInt + 1);
+        
+        if (chosenGameMode == GameModes.Any)
+            throw new ArgumentOutOfRangeException(nameof(gameModeInt), "Cannot set game mode to Any");
+        
+        this.gameMode = chosenGameMode;
     }
     
     public void UpdateAvailableSessions(NetworkRunner runner, List<SessionInfo> sessionList)
