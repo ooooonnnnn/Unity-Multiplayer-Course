@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Enums;
 using Fusion;
+using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
 using Singleton;
@@ -9,13 +10,15 @@ using Singleton;
 public class SessionJoiner : Singleton<SessionJoiner>
 {
     public const string GAMEMODE_PROPERTY_NAME = "GameMode";
+    public const string MAP_PROPERTY_NAME = "Map";
 
-    [Header("Custom Session Settings")]
     public string SessionName { get; set; }
+    [Header("Custom Session Settings")]
     [SerializeField] private int playerCapacity;
     [SerializeField] private int maxCapacity;
     [SerializeField] private bool isVisible;
     [SerializeField] private GameModes gameMode = GameModes.Fun;
+    [SerializeField] private Map map;
     
     [Header("Events")]
     public UnityEvent<int> OnCapacityChanged;
@@ -44,7 +47,8 @@ public class SessionJoiner : Singleton<SessionJoiner>
             IsVisible = isVisible,
             SessionProperties = new Dictionary<string, SessionProperty>
             {
-                {GAMEMODE_PROPERTY_NAME, (int)gameMode}
+                {GAMEMODE_PROPERTY_NAME, (int)gameMode},
+                {MAP_PROPERTY_NAME, map.MapName}
             }
         });
     }
@@ -105,4 +109,6 @@ public class SessionJoiner : Singleton<SessionJoiner>
         availableSessions = new List<SessionInfo>(sessionList);
         OnAvaliableSessionsChanged.Invoke(availableSessions);
     }
+    
+    public IEnumerable<SessionInfo> GetAvailableSessions() => availableSessions;
 }
