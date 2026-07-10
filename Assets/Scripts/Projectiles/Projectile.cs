@@ -1,3 +1,4 @@
+using System;
 using Fusion;
 using UnityEngine;
 
@@ -7,6 +8,9 @@ public class Projectile : NetworkBehaviour
     private TickTimer lifeTimer { get; set; }
     
     [SerializeField] private float speed = 10f;
+
+    [SerializeField]
+    private DamageData damageData;
 
     public override void Spawned()
     {
@@ -34,8 +38,25 @@ public class Projectile : NetworkBehaviour
         if (hitObject.TryGetComponent(out Player player) && hitObject.InputAuthority == Object.InputAuthority)
             return;
 
+        TriggerHitOnTargetRPC(hitObject.StateAuthority, hitObject.Id, damageData);
+
         Debug.Log("Projectile hit " + hitObject.name);
         Runner.Despawn(Object);
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    void TriggerHitOnTargetRPC([RpcTarget] PlayerRef player, NetworkId theOneUnskilledIndividualThatWasHit, DamageData sentDamageData)
+    {
+        if (!SinglePeer_NetworkRunnerManager.Instance.NetworkRunner.TryFindObject(theOneUnskilledIndividualThatWasHit, out NetworkObject sillyHittable)) return;
+
+        if (sentDamageData.damage > DamageData.MAX_POSSIBLE_DAMAGE || sentDamageData.damage < DamageData.MIN_POSSIBLE_DAMAGE)
+        {
+            Debug.LogError($"This {sentDamageData} was sent by an EVIL CHEATOR!!!! HAXXOR!!!! >:(");
+            return;
+        }
+
+        if (sillyHittable.TryGetComponent(out IHitable hitable))
+            hitable.OnHit(sentDamageData);
     }
 
     
