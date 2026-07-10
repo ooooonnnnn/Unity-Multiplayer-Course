@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,15 +7,23 @@ using ScriptableObjects;
 using UnityEngine;
 using Singleton;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class MatchMakingManager : Singleton<MatchMakingManager>
 {
-    public Map targetMap;
+    [SerializeField] private string targetMapName;
+    [SerializeField] private MapList mapList;
     [SerializeField] private float strictSearchTime = 5f;
     [SerializeField] private UnityEvent OnStartSearch;
     [SerializeField] private UnityEvent OnEndSearch;
+    [SerializeField] private UnityEvent<float> OnSearchTime;
     private Coroutine _searchCoroutine;
     private bool _isStrict = true;
+
+    private void OnValidate()
+    {
+        targetMapName = mapList.GetMapNames().First();
+    }
 
     protected override void Awake()
     {
@@ -31,7 +40,7 @@ public class MatchMakingManager : Singleton<MatchMakingManager>
         if (_isStrict)
             relevantSessions = sessionList.Where(info =>
                 info.Properties.ContainsKey(SessionJoiner.MAP_PROPERTY_NAME) &&
-                info.Properties[SessionJoiner.MAP_PROPERTY_NAME].PropertyValue.Equals(targetMap.MapName));
+                info.Properties[SessionJoiner.MAP_PROPERTY_NAME].PropertyValue.Equals(targetMapName));
 
         relevantSessions = relevantSessions.ToArray();
         int numberOfSessions = relevantSessions.Count();
@@ -41,6 +50,8 @@ public class MatchMakingManager : Singleton<MatchMakingManager>
             print("No sessions found");
             return;
         }
+        
+        StopSearching();
         
         SessionJoiner.Instance.JoinSpecificSession(relevantSessions.ToArray()[Random.Range(0, numberOfSessions)]);
     }
@@ -60,8 +71,21 @@ public class MatchMakingManager : Singleton<MatchMakingManager>
     {
         OnStartSearch.Invoke();
         _isStrict = true;
-        yield return new WaitForSeconds(strictSearchTime);
+        
+        float startTime = Time.time;
+        while (Time.time - startTime < strictSearchTime)
+        {
+            yield return null;
+            OnSearchTime.Invoke(Time.time - startTime);
+        }
+        
         _isStrict = false;
+        
+        while (true)
+        {
+            yield return null;
+            OnSearchTime.Invoke(Time.time - startTime);
+        }
     }
 
     public void StopSearching()
@@ -70,4 +94,6 @@ public class MatchMakingManager : Singleton<MatchMakingManager>
             StopCoroutine(_searchCoroutine);
         OnEndSearch.Invoke();
     }
+    
+    public void SetMapNameFromIndex(int index) => targetMapName = mapList.GetMapNames().ToArray()[index];
 }

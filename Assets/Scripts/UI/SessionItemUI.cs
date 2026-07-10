@@ -11,6 +11,7 @@ public class SessionItemUI : MonoBehaviour
     [SerializeField] private TMP_Text sessionName;
     [SerializeField] private TMP_Text playerCount;
     [SerializeField] private TMP_Text gameMode;
+    [SerializeField] private TMP_Text mapName;
     [SerializeField] private Button joinButton;
 
     public void SetSessionInfo(SessionInfo sessionInfo)
@@ -21,6 +22,7 @@ public class SessionItemUI : MonoBehaviour
                        sessionInfo.IsOpen;
         SetCanJoin(canJoin);
         SetGameMode((GameModes)sessionInfo.Properties[SessionJoiner.GAMEMODE_PROPERTY_NAME].PropertyValue);
+        SetMapName((string)sessionInfo.Properties[SessionJoiner.MAP_PROPERTY_NAME].PropertyValue);
     }
     
     private void SetSessionName(string name)
@@ -41,6 +43,11 @@ public class SessionItemUI : MonoBehaviour
     private void SetGameMode(GameModes gameMode)
     {
         this.gameMode.text = gameMode.GetDisplayName();
+    }
+
+    private void SetMapName(string name)
+    {
+        mapName.text = $"Map: {name}";
     }
 
     public void SetCallback(UnityAction callback)

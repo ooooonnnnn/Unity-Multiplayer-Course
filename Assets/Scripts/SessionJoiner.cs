@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Enums;
 using Fusion;
 using ScriptableObjects;
@@ -18,7 +19,8 @@ public class SessionJoiner : Singleton<SessionJoiner>
     [SerializeField] private int maxCapacity;
     [SerializeField] private bool isVisible;
     [SerializeField] private GameModes gameMode = GameModes.Fun;
-    [SerializeField] private Map map;
+    [SerializeField] private string mapName;
+    [SerializeField] private MapList mapList;
     
     [Header("Events")]
     public UnityEvent<int> OnCapacityChanged;
@@ -28,6 +30,11 @@ public class SessionJoiner : Singleton<SessionJoiner>
     public UnityEvent<List<SessionInfo>> OnAvaliableSessionsChanged;
     
     private List<SessionInfo> availableSessions;
+
+    private void OnValidate()
+    {
+        mapName = mapList.GetMapNames().First();
+    }
 
     private void Start()
     {
@@ -48,7 +55,7 @@ public class SessionJoiner : Singleton<SessionJoiner>
             SessionProperties = new Dictionary<string, SessionProperty>
             {
                 {GAMEMODE_PROPERTY_NAME, (int)gameMode},
-                {MAP_PROPERTY_NAME, map.MapName}
+                {MAP_PROPERTY_NAME, mapName}
             }
         });
     }
@@ -103,6 +110,8 @@ public class SessionJoiner : Singleton<SessionJoiner>
         
         this.gameMode = chosenGameMode;
     }
+
+    public void SetMapNameByIndex(int index) => mapName = mapList.GetMapNames().ToArray()[index];
     
     public void UpdateAvailableSessions(NetworkRunner runner, List<SessionInfo> sessionList)
     {
