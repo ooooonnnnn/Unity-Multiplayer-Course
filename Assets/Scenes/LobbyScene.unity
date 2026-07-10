@@ -10401,7 +10401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   playerCapacity: 5
   maxCapacity: 20
-  isVisible: 0
+  isVisible: 1
   gameMode: 1
   mapName: Petach Tikva
   mapList: {fileID: 11400000, guid: 564218f4b63ed944495da73c072c0da8, type: 2}
