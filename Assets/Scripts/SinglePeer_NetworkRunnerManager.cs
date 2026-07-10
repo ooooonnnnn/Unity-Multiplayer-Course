@@ -37,7 +37,7 @@ public class SinglePeer_NetworkRunnerManager : PersistentSingleton<SinglePeer_Ne
 
     public void ReinstantiateRunner()
     {
-        if (NetworkRunner) Destroy(NetworkRunner.gameObject);
+        if (networkRunner) Destroy(NetworkRunner.gameObject);
         
         NetworkRunner = Instantiate(networkRunnerPrefab, transform);
         NetworkRunner.AddCallbacks(networkEvents);

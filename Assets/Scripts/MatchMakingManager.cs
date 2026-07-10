@@ -29,7 +29,6 @@ public class MatchMakingManager : Singleton<MatchMakingManager>
     {
         base.Awake();
         OnStartSearch.AddListener(ListenForNewSessions);
-        OnStartSearch.AddListener(() => TryJoin(SessionJoiner.Instance.GetAvailableSessions().ToList()));
         OnEndSearch.AddListener(StopListeningForSessions);
     }
 
@@ -69,8 +68,10 @@ public class MatchMakingManager : Singleton<MatchMakingManager>
 
     private IEnumerator StartSearching()
     {
-        OnStartSearch.Invoke();
         _isStrict = true;
+        TryJoin(SessionJoiner.Instance.GetAvailableSessions().ToList());
+            
+        OnStartSearch.Invoke();
         
         float startTime = Time.time;
         while (Time.time - startTime < strictSearchTime)
@@ -80,6 +81,7 @@ public class MatchMakingManager : Singleton<MatchMakingManager>
         }
         
         _isStrict = false;
+        TryJoin(SessionJoiner.Instance.GetAvailableSessions().ToList());
         
         while (true)
         {
