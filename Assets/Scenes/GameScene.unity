@@ -2398,6 +2398,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4ae5ed1f7d2ba4bb9b6e055418e304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!1 &563555595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 563555597}
+  - component: {fileID: 563555596}
+  - component: {fileID: 563555598}
+  m_Layer: 0
+  m_Name: Score Keeper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &563555596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563555595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2253fe2e68a2c241b4164069350e6df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  scoreForHit: 1
+--- !u!4 &563555597
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563555595}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 968.3708, y: 555.2258, z: -0.25607}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &563555598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563555595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkObject
+  SortKey: 3087173161
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 563555596}
+  ForceRemoteRenderTimeframe: 0
 --- !u!1001 &632236235
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4630,6 +4695,7 @@ SceneRoots:
   - {fileID: 1292589680}
   - {fileID: 952074404}
   - {fileID: 1465292333}
+  - {fileID: 563555597}
   - {fileID: 138996412}
   - {fileID: 1114903138}
   - {fileID: 1563091535}

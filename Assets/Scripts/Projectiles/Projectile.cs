@@ -39,6 +39,7 @@ public class Projectile : NetworkBehaviour
             return;
 
         TriggerHitOnTargetRPC(hitObject.StateAuthority, hitObject.Id, damageData);
+        ScoreManager.Instance.AddScoreForHit_Client();
 
         Debug.Log("Projectile hit " + hitObject.name);
         Runner.Despawn(Object);
@@ -58,6 +59,4 @@ public class Projectile : NetworkBehaviour
         if (sillyHittable.TryGetComponent(out IHitable hitable))
             hitable.OnHit(sentDamageData);
     }
-
-    
 }
